@@ -6,7 +6,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DropboxService } from './dropbox.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -23,7 +22,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     HttpClientModule,
   ],
   providers: [
-    DropboxService,
     StatusBar,
     SplashScreen,
     InAppBrowser,
