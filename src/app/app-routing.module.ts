@@ -8,14 +8,18 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadChildren: () =>
-      import('./folder/folder.module').then((m) => m.FolderPageModule),
-  },
-  {
     path: 'dashboard',
     loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardPageModule),
+      import('./pages/dashboard/dashboard.module').then(
+        (m) => m.DashboardPageModule
+      ),
+  },
+  {
+    path: 'flashcards',
+    loadChildren: () =>
+      import('./pages/flashcards/flashcards.module').then(
+        (m) => m.FlashcardsPageModule
+      ),
   },
 ];
 
