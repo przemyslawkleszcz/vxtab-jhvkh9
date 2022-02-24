@@ -6,14 +6,20 @@
           <ion-list-header>Inbox</ion-list-header>
           <ion-note>hi@ionicframework.com</ion-note>
 
-          <ion-menu-toggle auto-hide="false" *ngIf="!this.access_token">
+          <ion-menu-toggle
+            auto-hide="false"
+            *ngIf="!this.dropboxService.getAccessToken()"
+          >
             <ion-item button (click)="loginToDropbox()">
               <ion-label> Login to dropbox </ion-label>
               <ion-icon name="logo-dropbox" slot="start"></ion-icon>
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle auto-hide="false" *ngIf="this.access_token">
+          <ion-menu-toggle
+            auto-hide="false"
+            *ngIf="this.dropboxService.getAccessToken()"
+          >
             <ion-item>
               <ion-label> Connected </ion-label>
               <ion-icon
@@ -43,19 +49,6 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon
-              slot="start"
-              ios="bookmark-outline"
-              md="bookmark-sharp"
-            ></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
