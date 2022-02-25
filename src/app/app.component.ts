@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { DropboxService } from './services/dropbox.service';
+import { DropboxService } from './services/dropbox/dropbox.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

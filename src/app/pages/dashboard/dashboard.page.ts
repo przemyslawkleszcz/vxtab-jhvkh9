@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
-import { DropboxService } from '../../services/dropbox.service';
+import { DropboxService } from '../../services/dropbox/dropbox.service';
 
 @Component({
   selector: 'app-dashboard',
