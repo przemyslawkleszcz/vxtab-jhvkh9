@@ -14,5 +14,11 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container"></div>
+  <div id="container">
+    <ion-button (click)="export()">Save to Dropbox</ion-button>
+    <ion-button (click)="import()">Load from Dropbox</ion-button>
+    <ul>
+      <li *ngFor="let item of items">{{item.key}}: {{item.value}}</li>
+    </ul>
+  </div>
 </ion-content>
