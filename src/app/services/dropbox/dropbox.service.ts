@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +44,34 @@ export class DropboxService {
     return this.http.post(
       'https://api.dropboxapi.com/2-beta-2/users/get_current_account',
       'null',
+      { headers: headers }
+    );
+  }
+
+  download() {
+    var headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.getAccessToken(),
+      'Dropbox-API-Arg': '{"path": "/data.json"}',
+    });
+
+    return this.http.post(
+      'https://content.dropboxapi.com/2/files/download',
+      '',
+      { headers: headers }
+    );
+  }
+
+  upload(obj) {
+    var headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.getAccessToken(),
+      'Content-Type': 'application/octet-stream',
+      'Dropbox-API-Arg':
+        '{"path": "/data.json","mode": "overwrite","autorename": true,"mute": false}',
+    });
+
+    return this.http.post(
+      'https://content.dropboxapi.com/2/files/upload',
+      obj,
       { headers: headers }
     );
   }
