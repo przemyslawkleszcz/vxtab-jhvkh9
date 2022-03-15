@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,21 +32,35 @@ export class DropboxService {
     localStorage.setItem('vxtabtoken', token);
   }
 
+  clearAccessToken() {
+    localStorage.removeItem('vxtabtoken');
+  }
+
   getAccessToken() {
     return localStorage.getItem('vxtabtoken');
   }
 
-  getUserInfo() {
-    let headers = new HttpHeaders();
+  validateToken() {
+    return new Observable<boolean>((subscriber) => {
+      console.log(this.getAccessToken());
+      var headers = new HttpHeaders({
+        Authorization: 'Bearer ' + this.getAccessToken() + 'b',
+        'Content-Type': 'application/json',
+      });
 
-    headers.append('Authorization', 'Bearer ' + this.getAccessToken());
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.post(
-      'https://api.dropboxapi.com/2-beta-2/users/get_current_account',
-      'null',
-      { headers: headers }
-    );
+      return this.http
+        .post('https://api.dropboxapi.com/2/check/user', '{"query": ""}', {
+          headers: headers,
+        })
+        .subscribe(
+          () => {
+            subscriber.next(true);
+          },
+          (error) => {
+            subscriber.next(false);
+          }
+        );
+    });
   }
 
   download() {
