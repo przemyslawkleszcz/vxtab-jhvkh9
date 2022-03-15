@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,27 @@ export class DropboxService {
     return localStorage.getItem('vxtabtoken');
   }
 
+  validateToken() {
+    return new Observable<boolean>((subscriber) => {
+      console.log(this.getAccessToken());
+      var headers = new HttpHeaders({
+        Authorization: 'Bearer ' + this.getAccessToken() + 'b',
+        'Content-Type': 'application/json',
+      });
+
+      return this.http
+        .post('https://api.dropboxapi.com/2/check/user', '{"query": ""}', {
+          headers: headers,
+        })
+        .subscribe(
+          () => {
+            subscriber.next(true);
+          },
+          (error) => {
+            subscriber.next(false);
+          }
+        );
+    });
   }
 
   download() {
