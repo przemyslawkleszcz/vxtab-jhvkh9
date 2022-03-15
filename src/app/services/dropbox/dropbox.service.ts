@@ -31,6 +31,10 @@ export class DropboxService {
     localStorage.setItem('vxtabtoken', token);
   }
 
+  clearAccessToken() {
+    localStorage.removeItem('vxtabtoken');
+  }
+
   getAccessToken() {
     return localStorage.getItem('vxtabtoken');
   }
