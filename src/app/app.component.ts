@@ -24,7 +24,13 @@ export class AppComponent implements OnInit {
 
       this.activatedRoute.fragment.subscribe((params) => {
         if (params == null) return;
-        if (this.dropboxService.getAccessToken()) return;
+        if (this.dropboxService.getAccessToken()) {
+          this.dropboxService.validateToken().subscribe((result) => {
+            if (!result) this.dropboxService.clearAccessToken();
+          });
+
+          return;
+        }
 
         let fragments = params.split('&');
         let fragment = {};
