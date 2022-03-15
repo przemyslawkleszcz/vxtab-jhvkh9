@@ -35,17 +35,6 @@ export class DropboxService {
     return localStorage.getItem('vxtabtoken');
   }
 
-  getUserInfo() {
-    let headers = new HttpHeaders();
-
-    headers.append('Authorization', 'Bearer ' + this.getAccessToken());
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.post(
-      'https://api.dropboxapi.com/2-beta-2/users/get_current_account',
-      'null',
-      { headers: headers }
-    );
   }
 
   download() {
