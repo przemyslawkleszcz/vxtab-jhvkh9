@@ -3,7 +3,7 @@ import { Platform } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { DropboxService } from './services/dropbox/dropbox.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public dropboxService: DropboxService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     platform.ready().then(() => {
       // statusBar.styleDefault();
@@ -39,8 +40,10 @@ export class AppComponent implements OnInit {
           fragment[y[0]] = y[1];
         });
 
-        if (fragment['access_token'])
+        if (fragment['access_token']) {
           this.dropboxService.setAccessToken(fragment['access_token']);
+          this.router.navigate(['/dashboard']);
+        }
       });
     });
   }
