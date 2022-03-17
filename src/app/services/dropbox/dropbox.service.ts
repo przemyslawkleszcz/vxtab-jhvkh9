@@ -42,9 +42,8 @@ export class DropboxService {
 
   validateToken() {
     return new Observable<boolean>((subscriber) => {
-      console.log(this.getAccessToken());
       var headers = new HttpHeaders({
-        Authorization: 'Bearer ' + this.getAccessToken() + 'b',
+        Authorization: 'Bearer ' + this.getAccessToken(),
         'Content-Type': 'application/json',
       });
 
