@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
 import { DropboxService } from '../../services/dropbox/dropbox.service';
+
 import {
   DatabaseService,
   IData,
 } from 'src/app/services/database/database.service';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,5 +39,13 @@ export class DashboardPage implements OnInit {
     this.databaseService.importToDb().subscribe(async (result) => {
       this.items = await this.databaseService.getAll();
     });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }

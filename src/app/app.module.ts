@@ -14,6 +14,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers, Storage } from '@ionic/storage';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +29,8 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
       name: '__mydb',
       driverOrder: [Drivers.IndexedDB],
     }),
+    NoopAnimationsModule,
+    DragDropModule,
   ],
   providers: [
     StatusBar,

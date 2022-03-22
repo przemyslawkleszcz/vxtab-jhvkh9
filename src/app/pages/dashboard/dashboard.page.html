@@ -15,10 +15,24 @@
   </ion-header>
 
   <div id="container">
-    <ion-button (click)="export()">Save to Dropbox</ion-button>
-    <ion-button (click)="import()">Load from Dropbox</ion-button>
-    <ul>
-      <li *ngFor="let item of items">{{item.key}}: {{item.value}}</li>
-    </ul>
+    <ion-button class="button" (click)="export()">Save to Dropbox</ion-button>
+    <ion-button class="button" (click)="import()">Load from Dropbox</ion-button>
+
+    <div cdkDropListGroup>
+      <div class="example-container">
+        <div
+          cdkDropList
+          [cdkDropListData]="items"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div class="example-box" *ngFor="let item of items" cdkDrag>
+            {{item.value.header}}
+            <br />
+            {{item.value.notes}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
