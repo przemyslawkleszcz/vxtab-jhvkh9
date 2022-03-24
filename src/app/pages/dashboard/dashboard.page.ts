@@ -47,5 +47,7 @@ export class DashboardPage implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+
+    this.databaseService.update(this.items);
   }
 }
