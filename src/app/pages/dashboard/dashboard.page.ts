@@ -6,11 +6,7 @@ import {
   DatabaseService,
   IData,
 } from 'src/app/services/database/database.service';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,5 +43,7 @@ export class DashboardPage implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+
+    this.databaseService.update(this.items);
   }
 }

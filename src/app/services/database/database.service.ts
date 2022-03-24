@@ -3,10 +3,12 @@ import { Storage } from '@ionic/storage-angular';
 import { DropboxService } from '../dropbox/dropbox.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable, from, forkJoin } from 'rxjs';
+import * as _ from 'lodash';
 
 export interface IData {
   header: string;
   notes: string;
+  order: number;
 }
 
 @Injectable({
@@ -64,12 +66,21 @@ export class DatabaseService {
     this.storage.remove(key);
   }
 
+  update(items: { key: string; value: IData }[]) {
+    for (var i = 0; i < items.length; i++) {
+      items[i].value.order = i;
+      this.storage.set(items[i].key, items[i].value);
+    }
+  }
+
   async getAll(): Promise<{ key: string; value: IData }[]> {
     let tab: { key: string; value: IData }[] = [];
     await this.storage.forEach((value, key, index) => {
       var obj = { key: key, value: value };
       tab.push(obj);
     });
+
+    tab = _.sortBy(tab, (element) => element.value.order);
 
     return new Promise<{ key: string; value: IData }[]>((resolve) => {
       resolve(tab);
