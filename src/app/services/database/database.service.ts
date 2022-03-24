@@ -81,6 +81,8 @@ export class DatabaseService {
       tab.push(obj);
     });
 
+    tab = _.sortBy(tab, (element) => element.value.order);
+
     return new Promise<{ key: string; value: IData }[]>((resolve) => {
       resolve(tab);
     });
