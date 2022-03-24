@@ -67,7 +67,6 @@ export class DatabaseService {
   }
 
   update(items: { key: string; value: IData }[]) {
-    console.log(items);
     for (var i = 0; i < items.length; i++) {
       items[i].value.order = i;
       this.storage.set(items[i].key, items[i].value);
